@@ -1,4 +1,4 @@
-package alejandromr92.com.movies.presentation.presenter.impl;
+package alejandromr92.com.movies.presentation.presenter;
 
 import alejandromr92.com.movies.domain.interactor.base.Executor;
 import alejandromr92.com.movies.domain.interactor.base.MainThread;

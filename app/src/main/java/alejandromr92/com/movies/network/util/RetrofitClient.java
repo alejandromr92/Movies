@@ -1,7 +1,7 @@
 package alejandromr92.com.movies.network.util;
 
 import alejandromr92.com.movies.network.Constants;
-import alejandromr92.com.movies.network.service.MoviesService;
+import alejandromr92.com.movies.network.service.MovieService;
 import android.support.annotation.Nullable;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -33,6 +33,13 @@ public class RetrofitClient {
         }
     }
 
-
+    /**
+     * Get Movie API.
+     *
+     * @return Movie aervice
+     */
+    public static MovieService getMovieService(String url, @Nullable Interceptor interceptor) {
+        return getRetrofitInstance(interceptor).baseUrl(url).build().create(MovieService.class);
+    }
 
 }
