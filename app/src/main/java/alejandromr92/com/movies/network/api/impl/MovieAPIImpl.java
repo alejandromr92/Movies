@@ -3,7 +3,6 @@ package alejandromr92.com.movies.network.api.impl;
 import alejandromr92.com.movies.network.api.MovieAPI;
 import alejandromr92.com.movies.network.interceptor.NonSecurityInterceptor;
 import alejandromr92.com.movies.network.model.converter.MovieNetworkConverter;
-import alejandromr92.com.movies.network.model.request.PopularMoviesRequest;
 import alejandromr92.com.movies.network.model.response.PopularMoviesResponse;
 import alejandromr92.com.movies.network.service.Endpoints;
 import alejandromr92.com.movies.network.service.MovieService;
@@ -24,9 +23,7 @@ public class MovieAPIImpl implements MovieAPI {
     @Override
     public void getPopularMovies(PopularMoviesCallback callback) {
 
-        PopularMoviesRequest request = new PopularMoviesRequest();
-
-        Call<PopularMoviesResponse> call = service.getPopularMovies(request);
+        Call<PopularMoviesResponse> call = service.getPopularMovies(Endpoints.API_KEY);
 
         try {
             Response<PopularMoviesResponse> response = call.execute();
