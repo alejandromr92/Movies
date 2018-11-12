@@ -14,6 +14,8 @@ public class GetPopularMoviesInteractorImpl extends BaseInteractor implements Ge
     private MovieRepository movieRepository;
     private Callback callback;
 
+    private int page;
+
     public GetPopularMoviesInteractorImpl(Executor threadExecutor, MainThread mainThread, MovieRepository movieRepository, Callback callback) {
         super(threadExecutor, mainThread);
         this.movieRepository = movieRepository;
@@ -21,13 +23,14 @@ public class GetPopularMoviesInteractorImpl extends BaseInteractor implements Ge
     }
 
     @Override
-    public void execute() {
+    public void execute(int page) {
+        this.page = page;
         threadExecutor.execute(this);
     }
 
     @Override
     public void run() {
-        movieRepository.getPopularMovies(this);
+        movieRepository.getPopularMovies(page, this);
     }
 
     @Override

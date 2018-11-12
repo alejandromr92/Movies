@@ -19,9 +19,9 @@ public class MovieRepositoryImpl implements MovieRepository, MovieAPI.PopularMov
     }
 
     @Override
-    public void getPopularMovies(PopularMoviesCallback callback) {
+    public void getPopularMovies(int page, PopularMoviesCallback callback) {
         this.popularMoviesCallback = callback;
-        this.movieAPI.getPopularMovies(this);
+        this.movieAPI.getPopularMovies(page, this);
     }
 
     @Override

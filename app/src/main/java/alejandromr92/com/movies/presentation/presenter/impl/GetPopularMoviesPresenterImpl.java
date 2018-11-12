@@ -25,9 +25,9 @@ public class GetPopularMoviesPresenterImpl extends BasePresenter implements GetP
     }
 
     @Override
-    public void getPopularMovies() {
+    public void getPopularMovies(int page) {
         GetPopularMoviesInteractor interactor = new GetPopularMoviesInteractorImpl(executor, mainThread, movieRepository, this);
-        interactor.execute(); //TODO parametrize page
+        interactor.execute(page);
     }
 
     @Override

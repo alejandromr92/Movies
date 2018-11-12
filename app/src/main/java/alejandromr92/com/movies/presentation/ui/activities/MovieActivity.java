@@ -16,9 +16,12 @@ public class MovieActivity extends BaseActivity implements GetPopularMoviesPrese
 
     private GetPopularMoviesPresenter getPopularMoviesPresenter;
 
+    private int page;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.layout = R.layout.activity_main;
+        this.page = 1;
 
         super.onCreate(savedInstanceState);
     }
@@ -38,12 +41,12 @@ public class MovieActivity extends BaseActivity implements GetPopularMoviesPrese
     protected void loadData() {
         super.loadData();
 
-        this.getPopularMoviesPresenter.getPopularMovies();
+        this.getPopularMoviesPresenter.getPopularMovies(this.page);
     }
 
     @Override
     public void onPopularMoviesRetrieved(List<MovieView> movieList) {
-
+        this.page++;
     }
 
     @Override

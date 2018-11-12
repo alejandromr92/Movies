@@ -6,4 +6,5 @@ public interface Constants {
     long CONNECT_TIME_OUT = 60L;
 
     String API_KEY = "api_key";
+    String API_PAGE = "page";
 }

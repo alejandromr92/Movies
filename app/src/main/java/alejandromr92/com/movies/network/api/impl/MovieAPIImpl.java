@@ -21,9 +21,9 @@ public class MovieAPIImpl implements MovieAPI {
     }
 
     @Override
-    public void getPopularMovies(PopularMoviesCallback callback) {
+    public void getPopularMovies(int page, PopularMoviesCallback callback) {
 
-        Call<PopularMoviesResponse> call = service.getPopularMovies(Endpoints.API_KEY);
+        Call<PopularMoviesResponse> call = service.getPopularMovies(Endpoints.API_KEY, page);
 
         try {
             Response<PopularMoviesResponse> response = call.execute();

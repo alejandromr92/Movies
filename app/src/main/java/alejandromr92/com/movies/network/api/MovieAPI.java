@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MovieAPI {
 
-    void getPopularMovies(PopularMoviesCallback callback);
+    void getPopularMovies(int page, PopularMoviesCallback callback);
 
     interface PopularMoviesCallback {
         void onPopularMoviesRetrieved(List<MovieDataStore> movieDataStoreList);

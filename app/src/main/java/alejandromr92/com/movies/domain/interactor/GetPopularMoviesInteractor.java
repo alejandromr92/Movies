@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GetPopularMoviesInteractor {
 
-    void execute();
+    void execute(int page);
 
     interface Callback {
         void onPopularMoviesRetrieved(List<Movie> movieList);

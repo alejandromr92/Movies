@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GetPopularMoviesPresenter {
 
-    void getPopularMovies();
+    void getPopularMovies(int page);
 
     interface View {
         void onPopularMoviesRetrieved(List<MovieView> movieList);
