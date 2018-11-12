@@ -79,8 +79,8 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                // End of list reached
-                if (hasReachedBottom()){
+                // End of list reached and not filtering
+                if (hasReachedBottom() && moviesSearchView.getQuery().toString().isEmpty()){
                     getPopularMoviesPresenter.getPopularMovies(page);
                 }
             }
@@ -124,7 +124,13 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
     @Override
     public void onPopularMoviesRetrieved(List<MovieView> moviesList) {
         this.page++;
-        this.moviesList.addAll(moviesList);
+
+        for (MovieView view: moviesList){
+            if (!this.moviesList.contains(view)){
+                this.moviesList.add(view);
+            }
+        }
+
         this.movieListAdapter.notifyDataSetChanged();
     }
 
