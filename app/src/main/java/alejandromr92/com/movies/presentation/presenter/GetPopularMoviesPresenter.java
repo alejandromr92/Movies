@@ -8,7 +8,7 @@ public interface GetPopularMoviesPresenter {
 
     void getPopularMovies(int page);
 
-    interface View {
+    interface View extends BaseView{
         void onPopularMoviesRetrieved(List<MovieView> movieList);
         void onPopularMoviesRetrievingError(int errorCode);
     }

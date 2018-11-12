@@ -1,6 +1,7 @@
 package alejandromr92.com.movies.network.model.converter;
 
 import alejandromr92.com.movies.network.model.response.MovieResponse;
+import alejandromr92.com.movies.network.service.Endpoints;
 import alejandromr92.com.movies.storage.model.MovieDataStore;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public abstract class MovieNetworkConverter {
 
         store.setTitle(network.getTitle());
         store.setOverview(network.getOverview());
-        store.setPictureUrl(network.getPictureUrl());
+        store.setPictureUrl(Endpoints.MOVIES_POSTERS_BASE_URL + network.getPictureUrl());
         store.setYear(network.getReleaseDate().substring(0, 4)); //TODO add method in helper class
 
         return store;

@@ -26,17 +26,20 @@ public class GetPopularMoviesPresenterImpl extends BasePresenter implements GetP
 
     @Override
     public void getPopularMovies(int page) {
+        view.showProgress();
         GetPopularMoviesInteractor interactor = new GetPopularMoviesInteractorImpl(executor, mainThread, movieRepository, this);
         interactor.execute(page);
     }
 
     @Override
     public void onPopularMoviesRetrieved(List<Movie> movieList) {
+        view.hideProgress();
         view.onPopularMoviesRetrieved(MovieViewconverter.convertListToViewModel(movieList));
     }
 
     @Override
     public void onPopularMoviesRetrievingError(int errorCode) {
+        view.hideProgress();
         view.onPopularMoviesRetrievingError(errorCode);
     }
 }

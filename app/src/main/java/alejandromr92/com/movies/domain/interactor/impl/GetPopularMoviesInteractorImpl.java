@@ -34,12 +34,22 @@ public class GetPopularMoviesInteractorImpl extends BaseInteractor implements Ge
     }
 
     @Override
-    public void onPopularMoviesRetrieved(List<Movie> movieList) {
-        callback.onPopularMoviesRetrieved(movieList);
+    public void onPopularMoviesRetrieved(final List<Movie> movieList) {
+        this.mainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onPopularMoviesRetrieved(movieList);
+            }
+        });
     }
 
     @Override
-    public void onPopularMoviesRetrievingError(int errorCode) {
-        callback.onPopularMoviesRetrievingError(errorCode);
+    public void onPopularMoviesRetrievingError(final int errorCode) {
+        this.mainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onPopularMoviesRetrievingError(errorCode);
+            }
+        });
     }
 }

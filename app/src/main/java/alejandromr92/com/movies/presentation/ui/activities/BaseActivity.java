@@ -1,13 +1,15 @@
 package alejandromr92.com.movies.presentation.ui.activities;
 
+import alejandromr92.com.movies.presentation.presenter.BaseView;
 import alejandromr92.com.movies.utils.LoggerUtils;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     protected String TAG = "";
 
@@ -15,6 +17,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     // Butterknife
     protected Unbinder binder;
+
+    protected ProgressDialog progressDialog;
 
 
 /////////////////////////////////////////////
@@ -24,6 +28,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.progressDialog = new ProgressDialog(this);
 
         this.setContentView(this.layout);
 
@@ -47,7 +53,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        loadData();
+        this.configViews();
+
+        this.loadData();
 
         LoggerUtils.logMessage(TAG, "onStart()");
     }
@@ -55,6 +63,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
+        this.resetData();
+
         LoggerUtils.logMessage(TAG, "onStop()");
     }
 
@@ -87,6 +98,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * Override in children to reset necessary data.
+     */
+    protected void resetData(){
+
+    }
+
+    /**
+     * Override in children to customize views (colors, backgrounds, etc)
+     */
+    protected void configViews(){}
+
+    /**
      * View injection.
      */
     private void injectViews(){
@@ -102,12 +125,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void showProgress(){
-        //TODO
+    public void showProgress(){
+        if (!this.progressDialog.isShowing()) {
+            this.progressDialog = ProgressDialog.show(this, "",
+                    "Loading...", true); //TODO ADD STRINGS RESOURCES
+        }
     }
 
-    protected void hideProgress(){
-        //TODO
+    public void hideProgress(){
+        if(this.progressDialog.isShowing()){
+            this.progressDialog.dismiss();
+        }
     }
 
 }
