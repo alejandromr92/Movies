@@ -20,7 +20,6 @@
 
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintTop_toTopOf="@id/movie_title"
-        app:layout_constraintBottom_toBottomOf="@id/movie_overview"
         />
 
     <TextView
@@ -49,18 +48,28 @@
         style="@style/MovieHolder.Info"
         />
 
-    <TextView
-        android:id="@+id/movie_overview"
+    <ScrollView
+        android:id="@+id/movie_scroll_overview"
         android:layout_width="@dimen/none"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/none"
 
         app:layout_constraintTop_toBottomOf="@id/movie_year_released"
+        app:layout_constraintBottom_toBottomOf="@id/movie_poster"
         app:layout_constraintStart_toStartOf="@id/movie_year_released"
         app:layout_constraintEnd_toEndOf="parent"
+        >
 
-        tools:text="@string/dummy_movie_overview"
-        style="@style/MovieHolder.Info"
+        <TextView
+                android:id="@+id/movie_overview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                tools:text="@string/dummy_movie_overview"
+                style="@style/MovieHolder.Info"
         />
+
+    </ScrollView>
+
 
 
 </android.support.constraint.ConstraintLayout>

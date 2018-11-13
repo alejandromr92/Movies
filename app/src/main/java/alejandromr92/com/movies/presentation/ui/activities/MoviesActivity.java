@@ -16,7 +16,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.View;
 import butterknife.BindView;
+import butterknife.OnTouch;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -139,4 +141,11 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
     public void onPopularMoviesRetrievingError(int errorCode) {
         LoggerUtils.logError(TAG, String.valueOf(errorCode), new Exception());
     }
+
+    @OnTouch(R.id.movie_list)
+    public boolean onMoviesRecyclerviewTouch(View v) {
+        v.getParent().requestDisallowInterceptTouchEvent(false);
+        return false;
+    }
+
 }

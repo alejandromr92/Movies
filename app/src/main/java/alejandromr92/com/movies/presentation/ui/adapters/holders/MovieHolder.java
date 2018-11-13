@@ -6,9 +6,11 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnTouch;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
@@ -23,6 +25,9 @@ public class MovieHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.movie_year_released)
     TextView yearReleased;
+
+    @BindView(R.id.movie_scroll_overview)
+    ScrollView scrollOverview;
 
     @BindView(R.id.movie_overview)
     TextView overview;
@@ -50,5 +55,11 @@ public class MovieHolder extends RecyclerView.ViewHolder {
         yearReleased.setText(holder.getYear());
 
         overview.setText(holder.getOverview());
+    }
+
+    @OnTouch(R.id.movie_scroll_overview)
+    public boolean onScrollOverviewTouch(View v){
+        v.getParent().requestDisallowInterceptTouchEvent(true);
+        return false;
     }
 }
