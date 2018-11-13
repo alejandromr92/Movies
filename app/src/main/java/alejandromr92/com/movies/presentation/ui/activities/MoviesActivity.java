@@ -13,6 +13,7 @@ import alejandromr92.com.movies.utils.LoggerUtils;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -73,6 +74,9 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         this.moviesRecyclerView.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(moviesRecyclerView.getContext(), layoutManager.getOrientation());
+        moviesRecyclerView.addItemDecoration(dividerItemDecoration);
 
         this.movieListAdapter = new MovieListAdapter(moviesList, new WeakReference<Context>(this));
         this.moviesRecyclerView.setAdapter(movieListAdapter);

@@ -10,6 +10,7 @@
     android:layout_marginTop="@dimen/movie_holder_margin_top"
     android:layout_marginStart="@dimen/movie_holder_margin_sides"
     android:layout_marginEnd="@dimen/movie_holder_margin_sides"
+    android:padding="@dimen/movie_holder_padding"
     >
     
     <ImageView
