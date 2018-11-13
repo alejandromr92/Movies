@@ -2,6 +2,9 @@ package alejandromr92.com.movies.utils;
 
 import android.util.Log;
 
+/**
+ * Helper class to register logs.
+ */
 public abstract class LoggerUtils {
 
     public static void logMessage(String tag, String message){
