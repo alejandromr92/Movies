@@ -139,6 +139,7 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
 
         this.page = Constants.DEFAULT_PAGE;
         this.moviesSearchView.setQuery("", false);
+        this.moviesList.clear();
     }
 
     @Override
