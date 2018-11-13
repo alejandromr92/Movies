@@ -13,6 +13,7 @@ import alejandromr92.com.movies.utils.LoggerUtils;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesActivity extends BaseActivity implements GetPopularMoviesPresenter.View{
+
+    private final String TAG = MoviesActivity.class.getSimpleName();
+
+    @BindView(R.id.movies_container_layout)
+    ConstraintLayout containerLayout;
 
     @BindView(R.id.movies_searchview)
     SearchView moviesSearchView;
@@ -47,6 +53,13 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
         this.page = Constants.DEFAULT_PAGE;
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        containerLayout.requestFocus();
     }
 
     @Override
