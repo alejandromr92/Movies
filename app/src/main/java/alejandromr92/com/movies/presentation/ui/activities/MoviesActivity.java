@@ -3,6 +3,7 @@ package alejandromr92.com.movies.presentation.ui.activities;
 import alejandromr92.com.movies.R;
 import alejandromr92.com.movies.domain.threading.MainThreadImpl;
 import alejandromr92.com.movies.domain.threading.ThreadExecutor;
+import alejandromr92.com.movies.presentation.Constants;
 import alejandromr92.com.movies.presentation.model.MovieView;
 import alejandromr92.com.movies.presentation.presenter.GetPopularMoviesPresenter;
 import alejandromr92.com.movies.presentation.presenter.impl.GetPopularMoviesPresenterImpl;
@@ -40,7 +41,7 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.layout = R.layout.activity_movies;
-        this.page = 1;
+        this.page = Constants.DEFAULT_PAGE;
 
         super.onCreate(savedInstanceState);
     }
@@ -117,7 +118,7 @@ public class MoviesActivity extends BaseActivity implements GetPopularMoviesPres
     protected void resetData() {
         super.resetData();
 
-        this.page = 1;
+        this.page = Constants.DEFAULT_PAGE;
         this.moviesSearchView.setQuery("", false);
     }
 

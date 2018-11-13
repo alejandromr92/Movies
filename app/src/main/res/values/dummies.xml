@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="dummy_movie_title">This is a dummy title</string>
+    <string name="dummy_movie_release_year">1997</string>
+    <string name="dummy_movie_overview">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam condimentum lobortis. Sed tincidunt risus justo, et finibus lacus lacinia a. Praesent feugiat placerat libero, a lacinia sem tincidunt vel. Pellentesque in viverra eros. Donec eu orci a ex euismod ultrices. Curabitur ut sagittis est, vel molestie nisi. Integer in erat sit amet ligula porttitor bibendum. Sed pretium pretium arcu nec commodo. Nullam non ex eget nisl semper lacinia. Morbi condimentum, tellus nec euismod gravida, mauris sem pulvinar dolor, in sagittis felis elit at tellus. Cras eleifend vulputate massa non pharetra.</string>
+</resources>

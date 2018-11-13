@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- Base -->
+    <dimen name="none">0dp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_mid">14sp</dimen>
+
+    <!-- Movie holder -->
+    <dimen name="movie_holder_margin_sides">10dp</dimen>
+    <dimen name="movie_holder_margin_top">10dp</dimen>
+    <dimen name="movie_holder_poster_height">200dp</dimen>
+    <dimen name="movie_holder_info_margin_start">10dp</dimen>
+</resources>

@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Movie holder -->
+    <style name="MovieHolder"/>
+
+    <style name="MovieHolder.Title">
+        <item name="android:layout_marginStart">@dimen/movie_holder_info_margin_start</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_mid</item>
+    </style>
+
+    <style name="MovieHolder.Info">
+        <item name="android:fontFamily">@font/open_sans_light</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
 </resources>
