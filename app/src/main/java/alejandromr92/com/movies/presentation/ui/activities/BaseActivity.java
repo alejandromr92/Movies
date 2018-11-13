@@ -1,5 +1,6 @@
 package alejandromr92.com.movies.presentation.ui.activities;
 
+import alejandromr92.com.movies.R;
 import alejandromr92.com.movies.presentation.presenter.BaseView;
 import alejandromr92.com.movies.utils.LoggerUtils;
 import android.app.ProgressDialog;
@@ -128,7 +129,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public void showProgress(){
         if (!this.progressDialog.isShowing()) {
             this.progressDialog = ProgressDialog.show(this, "",
-                    "Loading...", true); //TODO ADD STRINGS RESOURCES
+                    getResources().getString(R.string.loading), true);
         }
     }
 

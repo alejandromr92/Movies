@@ -5,6 +5,8 @@ public interface Constants {
     long WRITE_TIME_OUT = 60L;
     long CONNECT_TIME_OUT = 60L;
 
+    int NETWORK_ERROR = 404;
+
     String API_KEY = "api_key";
     String API_PAGE = "page";
 }

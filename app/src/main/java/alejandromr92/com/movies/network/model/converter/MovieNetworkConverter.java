@@ -26,7 +26,7 @@ public abstract class MovieNetworkConverter {
         store.setTitle(network.getTitle());
         store.setOverview(network.getOverview());
         store.setPictureUrl(Endpoints.MOVIES_POSTERS_BASE_URL + network.getPictureUrl());
-        store.setYear(network.getReleaseDate().substring(0, 4)); //TODO add method in helper class
+        store.setYear(network.getReleaseDate().substring(0, 4));
 
         return store;
     }

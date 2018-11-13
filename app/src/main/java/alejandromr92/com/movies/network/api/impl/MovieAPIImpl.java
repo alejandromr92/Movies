@@ -1,5 +1,6 @@
 package alejandromr92.com.movies.network.api.impl;
 
+import alejandromr92.com.movies.network.Constants;
 import alejandromr92.com.movies.network.api.MovieAPI;
 import alejandromr92.com.movies.network.interceptor.NonSecurityInterceptor;
 import alejandromr92.com.movies.network.model.converter.MovieNetworkConverter;
@@ -36,8 +37,7 @@ public class MovieAPIImpl implements MovieAPI {
             }
 
         } catch (Exception e) {
-            //TODO pass code to constant
-            callback.onPopularMoviesRetrievingError(404);
+            callback.onPopularMoviesRetrievingError(Constants.NETWORK_ERROR);
         }
     }
 }
