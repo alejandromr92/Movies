@@ -14,7 +14,7 @@ import android.widget.Filterable
 import java.lang.ref.WeakReference
 import java.util.ArrayList
 
-class MovieListAdapter(private val items: List<MovieView>, private val reference: WeakReference<Context>) :
+class MovieListAdapter(private val items: List<MovieView>) :
     RecyclerView.Adapter<MovieHolder>(), Filterable {
     private var filteredItems: List<MovieView>? = null
 

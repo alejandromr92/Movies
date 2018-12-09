@@ -6,8 +6,7 @@ import alejandromr92.com.movies.utils.LoggerUtils
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import butterknife.ButterKnife
-import butterknife.Unbinder
+
 
 abstract class BaseActivity : AppCompatActivity(), BaseView {
 
@@ -15,10 +14,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 
     protected var layout = 0
 
-    // Butterknife
-    protected var binder: Unbinder? = null
-
-    protected var progressDialog: ProgressDialog
+    protected var progressDialog: ProgressDialog? = null
 
 
     /////////////////////////////////////////////
@@ -32,8 +28,6 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 
         this.setContentView(this.layout)
 
-        this.injectViews()
-
         this.initializePresenters()
 
         LoggerUtils.logMessage(TAG, "onCreate()")
@@ -42,10 +36,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     override fun onDestroy() {
         super.onDestroy()
 
-        this.freeViews()
-
         LoggerUtils.logMessage(TAG, "onDestroy()")
-
     }
 
     override fun onStart() {
@@ -104,24 +95,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
      */
     protected open fun configViews() {}
 
-    /**
-     * View injection.
-     */
-    private fun injectViews() {
-        this.binder = ButterKnife.bind(this)
-    }
-
-    /**
-     * View destruction.
-     */
-    private fun freeViews() {
-        if (this.binder != null) {
-            this.binder!!.unbind()
-        }
-    }
-
     override fun showProgress() {
-        if (!this.progressDialog.isShowing) {
+        if (!this.progressDialog!!.isShowing) {
             this.progressDialog = ProgressDialog.show(
                 this, "",
                 resources.getString(R.string.loading), true
@@ -130,8 +105,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     }
 
     override fun hideProgress() {
-        if (this.progressDialog.isShowing) {
-            this.progressDialog.dismiss()
+        if (this.progressDialog!!.isShowing) {
+            this.progressDialog!!.dismiss()
         }
     }
 

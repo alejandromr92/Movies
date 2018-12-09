@@ -5,13 +5,14 @@ import android.util.Log
 /**
  * Helper class to register logs.
  */
-object LoggerUtils {
+abstract class LoggerUtils {
+    companion object {
+       fun logMessage(tag: String, message: String) {
+            Log.d(tag, message)
+        }
 
-    fun logMessage(tag: String, message: String) {
-        Log.d(tag, message)
-    }
-
-    fun logError(tag: String, message: String, exception: Exception) {
-        Log.e(tag, message, exception)
+        fun logError(tag: String, message: String, exception: Exception) {
+            Log.e(tag, message, exception)
+        }
     }
 }

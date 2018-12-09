@@ -8,34 +8,17 @@ import alejandromr92.com.movies.presentation.presenter.impl.GetPopularMoviesPres
 import alejandromr92.com.movies.presentation.ui.adapters.MovieListAdapter
 import alejandromr92.com.movies.storage.repositories.impl.MovieRepositoryImpl
 import alejandromr92.com.movies.utils.LoggerUtils
-import android.content.Context
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
-import android.view.View
-import butterknife.BindView
-import butterknife.OnTouch
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-
-import java.lang.ref.WeakReference
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_movies.*
+import java.util.*
 
 class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
-
-    private val TAG = MoviesActivity::class.java.simpleName
-
-    @BindView(R.id.movies_container_layout)
-    internal var containerLayout: ConstraintLayout? = null
-
-    @BindView(R.id.movies_searchview)
-    internal var moviesSearchView: SearchView? = null
-
-    @BindView(R.id.movie_list)
-    internal var moviesRecyclerView: RecyclerView? = null
 
     private var getPopularMoviesPresenter: GetPopularMoviesPresenter? = null
 
@@ -55,7 +38,7 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
     override fun onResume() {
         super.onResume()
 
-        containerLayout!!.requestFocus()
+        movies_container_layout.requestFocus()
     }
 
     override fun initializePresenters() {
@@ -81,28 +64,33 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
         this.moviesList = ArrayList()
 
         val layoutManager = LinearLayoutManager(this)
-        this.moviesRecyclerView!!.layoutManager = layoutManager
+        movie_list.layoutManager = layoutManager
 
-        val dividerItemDecoration = DividerItemDecoration(moviesRecyclerView!!.context, layoutManager.orientation)
-        moviesRecyclerView!!.addItemDecoration(dividerItemDecoration)
+        val dividerItemDecoration = DividerItemDecoration(movie_list.context, layoutManager.orientation)
+        movie_list.addItemDecoration(dividerItemDecoration)
 
-        this.movieListAdapter = MovieListAdapter(moviesList, WeakReference(this))
-        this.moviesRecyclerView!!.adapter = movieListAdapter
+        this.movieListAdapter = MovieListAdapter(moviesList as ArrayList<MovieView>)
+        movie_list.adapter = movieListAdapter
 
-        this.moviesRecyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        movie_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 // End of list reached and not filtering
-                if (hasReachedBottom() && moviesSearchView!!.query.toString().isEmpty()) {
+                if (hasReachedBottom() && movies_searchview.query.toString().isEmpty()) {
                     getPopularMoviesPresenter!!.getPopularMovies(page)
                 }
             }
         })
+
+        movie_list.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(false)
+            false
+        }
     }
 
     private fun configSearchView() {
-        this.moviesSearchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        movies_searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -115,7 +103,7 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
     }
 
     private fun hasReachedBottom(): Boolean {
-        val linearLayoutManager = this.moviesRecyclerView!!.layoutManager as LinearLayoutManager
+        val linearLayoutManager = movie_list.layoutManager as LinearLayoutManager
         return linearLayoutManager.findLastCompletelyVisibleItemPosition() == movieListAdapter!!.itemCount - 1
     }
 
@@ -128,14 +116,8 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
         super.resetData()
 
         this.page = Constants.DEFAULT_PAGE
-        this.moviesSearchView!!.setQuery("", false)
+        movies_searchview.setQuery("", false)
         this.moviesList!!.clear()
-    }
-
-    @OnTouch(R.id.movie_list)
-    fun onMoviesRecyclerviewTouch(v: View): Boolean {
-        v.parent.requestDisallowInterceptTouchEvent(false)
-        return false
     }
 
     override fun onPopularMoviesRetrieved(retrievedMovies: List<MovieView>) {
@@ -151,7 +133,6 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
     }
 
     override fun onPopularMoviesRetrievingError() {
-        LoggerUtils.logError(TAG, 404.toString(), Exception())
-
+        LoggerUtils.logError("MoviesActivity", "errorCode", Exception())
     }
 }
