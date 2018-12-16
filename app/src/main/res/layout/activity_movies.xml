@@ -32,4 +32,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+    <TextView
+        android:id="@+id/error_message"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:text="@string/error_message"
+
+        android:gravity="center"
+        android:padding="@dimen/error_message_padding"
+
+        android:visibility="gone"
+    />
+
 </android.support.constraint.ConstraintLayout>

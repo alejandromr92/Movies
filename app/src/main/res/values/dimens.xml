@@ -12,4 +12,7 @@
     <dimen name="movie_holder_margin_top">10dp</dimen>
     <dimen name="movie_holder_poster_height">200dp</dimen>
     <dimen name="movie_holder_info_margin_start">10dp</dimen>
+
+    <!-- Movie activity -->
+    <dimen name="error_message_padding">30dp</dimen>
 </resources>

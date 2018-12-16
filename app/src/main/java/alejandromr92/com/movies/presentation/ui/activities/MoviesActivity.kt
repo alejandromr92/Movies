@@ -13,6 +13,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
+import android.view.View
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_movies.*
@@ -58,6 +59,8 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
         this.configRecyclerView()
 
         this.configSearchView()
+
+        this.configErrorMessage()
     }
 
     private fun configRecyclerView() {
@@ -102,6 +105,15 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
         })
     }
 
+    private fun configErrorMessage(){
+        error_message.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                getPopularMoviesPresenter!!.getPopularMovies(page)
+            }
+
+        })
+    }
+
     private fun hasReachedBottom(): Boolean {
         val linearLayoutManager = movie_list.layoutManager as LinearLayoutManager
         return linearLayoutManager.findLastCompletelyVisibleItemPosition() == movieListAdapter!!.itemCount - 1
@@ -120,7 +132,21 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
         this.moviesList!!.clear()
     }
 
+    private fun displayContent(moviesObtained: Boolean){
+        if (moviesObtained){
+            movies_searchview.visibility =  View.VISIBLE
+            movie_list.visibility = View.VISIBLE
+            error_message.visibility = View.GONE
+        } else {
+            movies_searchview.visibility =  View.GONE
+            movie_list.visibility = View.GONE
+            error_message.visibility = View.VISIBLE
+        }
+
+    }
+
     override fun onPopularMoviesRetrieved(retrievedMovies: List<MovieView>) {
+        displayContent(true)
         this.page++
 
         for (view in retrievedMovies) {
@@ -133,6 +159,7 @@ class MoviesActivity : BaseActivity(), GetPopularMoviesPresenter.View {
     }
 
     override fun onPopularMoviesRetrievingError() {
+        displayContent(false)
         LoggerUtils.logError("MoviesActivity", "errorCode", Exception())
     }
 }
